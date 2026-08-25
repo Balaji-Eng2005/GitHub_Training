@@ -1,0 +1,14 @@
+{
+  "name": "fleet-telemetry-dashboard-tests",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.54.2",
+    "@types/node": "^22.15.30",
+    "typescript": "^5.8.3"
+  }
+}

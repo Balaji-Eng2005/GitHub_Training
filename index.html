@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fleet Telemetry Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Operations Center</p>
+          <h1>Fleet Telemetry Dashboard</h1>
+        </div>
+        <div class="status-pill">
+          <span class="status-dot"></span>
+          Live telemetry
+        </div>
+      </header>
+
+      <section class="summary-grid">
+        <div class="stat-card">
+          <span class="label">Vehicles online</span>
+          <strong id="online-count">0</strong>
+        </div>
+        <div class="stat-card">
+          <span class="label">Average speed</span>
+          <strong id="avg-speed">0 km/h</strong>
+        </div>
+        <div class="stat-card">
+          <span class="label">Battery health</span>
+          <strong id="avg-battery">0%</strong>
+        </div>
+        <div class="stat-card">
+          <span class="label">Active routes</span>
+          <strong id="active-routes">0</strong>
+        </div>
+      </section>
+
+      <section class="dashboard-grid">
+        <aside class="panel vehicle-panel">
+          <div class="panel-header">
+            <h2>Fleet</h2>
+            <span id="last-update">--:--</span>
+          </div>
+          <div id="vehicle-list" class="vehicle-list"></div>
+        </aside>
+
+        <main class="panel telemetry-panel">
+          <div class="sensor-grid">
+            <article class="sensor-card">
+              <div class="sensor-topline">
+                <span>Speed</span>
+                <span id="speed-status" class="mini-tag">Nominal</span>
+              </div>
+              <div class="gauge-wrap">
+                <div class="gauge-ring">
+                  <div class="gauge-inner">
+                    <span id="speed-value">0</span>
+                    <small>km/h</small>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="sensor-card battery-card">
+              <div class="sensor-topline">
+                <span>Battery</span>
+                <span id="battery-status" class="mini-tag">Charging</span>
+              </div>
+              <div class="battery-box">
+                <div class="battery-shell">
+                  <div id="battery-fill" class="battery-fill"></div>
+                </div>
+                <div class="battery-value" id="battery-value">0%</div>
+              </div>
+            </article>
+
+            <article class="sensor-card map-card">
+              <div class="sensor-topline">
+                <span>GPS location</span>
+                <span id="gps-status" class="mini-tag">Tracking</span>
+              </div>
+              <div class="gps-info">
+                <div><label>Latitude</label><strong id="lat-value">0.0000</strong></div>
+                <div><label>Longitude</label><strong id="lon-value">0.0000</strong></div>
+              </div>
+            </article>
+          </div>
+
+          <div class="panel-block map-panel">
+            <div class="panel-header compact">
+              <h3>Fleet map</h3>
+            </div>
+            <svg id="fleet-map" viewBox="0 0 620 260" role="img" aria-label="Vehicle route map">
+              <defs>
+                <linearGradient id="roadGlow" x1="0%" x2="100%" y1="0%" y2="0%">
+                  <stop offset="0%" stop-color="#1fd1ff" stop-opacity="0.2" />
+                  <stop offset="100%" stop-color="#7c5cff" stop-opacity="0.4" />
+                </linearGradient>
+              </defs>
+              <g class="map-grid">
+                <path d="M0 40 H620" />
+                <path d="M0 90 H620" />
+                <path d="M0 140 H620" />
+                <path d="M0 190 H620" />
+                <path d="M0 240 H620" />
+                <path d="M80 0 V260" />
+                <path d="M180 0 V260" />
+                <path d="M280 0 V260" />
+                <path d="M380 0 V260" />
+                <path d="M480 0 V260" />
+                <path d="M580 0 V260" />
+              </g>
+              <g id="route-layer"></g>
+              <g id="marker-layer"></g>
+            </svg>
+          </div>
+
+          <div class="chart-grid">
+            <div class="panel-block chart-card">
+              <div class="panel-header compact">
+                <h3>Speed trend</h3>
+              </div>
+              <canvas id="speed-chart" width="420" height="180"></canvas>
+            </div>
+
+            <div class="panel-block chart-card">
+              <div class="panel-header compact">
+                <h3>Battery trend</h3>
+              </div>
+              <canvas id="battery-chart" width="420" height="180"></canvas>
+            </div>
+          </div>
+        </main>
+      </section>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
